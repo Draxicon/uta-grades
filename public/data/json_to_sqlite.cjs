@@ -56,6 +56,10 @@ db.serialize(() => {
       }
     });
 
+    // Create indexes for the table
+    db.run(`CREATE INDEX IF NOT EXISTS idx_${fileName}_course ON "${fileName}" (subject_id, course_number);`);
+    db.run(`CREATE INDEX IF NOT EXISTS idx_${fileName}_instructor ON "${fileName}" (instructor1);`);
+
     const placeholders = columns.map(() => '?').join(', ');
     const insertSql = `INSERT INTO "${fileName}" (${columns.map(col => `"${col}"`).join(', ')}) VALUES (${placeholders});`;
     const stmt = db.prepare(insertSql);
@@ -92,6 +96,10 @@ db.serialize(() => {
         console.log('Table created:', fileName);
       }
     });
+
+    // Create indexes for the allgrades table
+    db.run(`CREATE INDEX IF NOT EXISTS idx_allgrades_course ON "${fileName}" (subject_id, course_number);`);
+    db.run(`CREATE INDEX IF NOT EXISTS idx_allgrades_instructor ON "${fileName}" (instructor1);`);
 
     const placeholders = columns.map(() => '?').join(', ');
     const insertSql = `INSERT INTO "${fileName}" (${columns.map(col => `"${col}"`).join(', ')}) VALUES (${placeholders});`;

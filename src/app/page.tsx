@@ -27,7 +27,7 @@ export default function Home() {
         
         </h1>
         <p className="text-xl text-center text-gray-600 mb-4">
-          Learn from your previous peers. See how they did! It's free
+          Learn from your previous peers. See how they did! It&apos;s free
         </p>
         <SearchBar />
         <p className="mt-6 text-sm text-gray-500 text-center">

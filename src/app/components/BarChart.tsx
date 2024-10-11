@@ -1,6 +1,7 @@
 "use client";
 
 import { Bar } from "react-chartjs-2";
+import { Course } from './SideBar'; // Ensure Course includes the grades properties
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,13 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({ grades }) => {
+// Define the props type for the BarChart component
+interface BarChartProps {
+  grades: Course;
+}
+
+// Update the component to accept the correct props type
+const BarChart = ({ grades }: BarChartProps) => {
   // Prepare the grade data and labels
   const gradeLabels = ["A", "B", "C", "D", "F", "I", "P", "Q", "W", "Z", "R"];
   const gradeValues = [
@@ -31,8 +38,8 @@ const BarChart = ({ grades }) => {
   ];
 
   // Filter out grades that are 0
-  const filteredLabels = [];
-  const filteredData = [];
+  const filteredLabels: string[] = [];
+  const filteredData: number[] = [];
 
   gradeValues.forEach((value, index) => {
     if (value > 0) {
@@ -58,7 +65,7 @@ const BarChart = ({ grades }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: "top" as const, // make it a const to fix type checking
       },
       title: {
         display: true,
