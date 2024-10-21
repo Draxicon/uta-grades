@@ -56,8 +56,9 @@ export default function SearchBar({ initialValue = '' , resetState }: SearchBarP
 
     if (resetState) {
       resetState();
+      console.log("resetting");
     }
-
+    // console.log("hi");
     // Check if the suggestion is a professor or a course
     const isProfessor = suggestions.find(s => s.suggestion === suggestion && s.type === 'professor');
 
@@ -81,16 +82,16 @@ export default function SearchBar({ initialValue = '' , resetState }: SearchBarP
         placeholder="Search for a course or professor"
         value={searchInput}
         onChange={handleInputChange}
-        className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500"
+        className="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:border-indigo-500 bg-white bg-opacity-30"
       />
-      {isLoading && <div className="absolute w-full max-h-60 bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-10"></div>}
+      {isLoading && <div className="absolute w-full max-h-60 bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-10 text-black"></div>}
       {suggestions.length > 0 && !isLoading && (
         <ul className="absolute w-full max-h-60 bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-10 overflow-y-scroll">
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
               onClick={() => handleSearch(suggestion.suggestion)} 
-              className="px-4 py-2 hover:bg-indigo-100 cursor-pointer"
+              className="px-4 py-2 hover:bg-indigo-100 cursor-pointer text-black"
             >
               {suggestion.suggestion}
             </li>
